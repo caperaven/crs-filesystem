@@ -6,8 +6,35 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script type="module" src="node_modules/crs-binding/crs-binding.js"></script>
+    <script src="src/crs-filesystem-folder.js" type="module"></script>
+
+    <style>
+        html, body {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        crs-filesystem-folder {
+            display: block;
+            width: 300px;
+            height: 100%;
+            border-right: solid 1px #dadada;
+        }
+    </style>
 </head>
 <body>
+    <crs-filesystem-folder></crs-filesystem-folder>
 
+    <script type="module">
+        import Index from "./index.js";
+        document.viewModel = new Index(document.body);
+
+        window.addEventListener("load", (event) => {
+            document.viewModel.connectedCallback();
+        });
+    </script>
 </body>
 </html>
