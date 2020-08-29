@@ -41,12 +41,14 @@ crs-filesystem-folder li div {
 
 crs-filesystem-folder .chevron {
     margin-left: 0;
+    cursor: pointer;
+    fill: var(--cl-folder);
 }
 
 crs-filesystem-folder .folder-nav {
     display: flex;
     align-items: center;
-    padding-left: 1rem;
+    padding: 0 1rem;
     line-height: 2rem;
     color: var(--cl-folder);
 }
@@ -69,4 +71,38 @@ crs-filesystem-folder [data-type="#file"] .chevron, crs-filesystem-folder [data-
 
 crs-filesystem-folder [hidden] {
     display: none;
+}
+
+crs-filesystem-folder .stretch {
+    flex: 1;
+}
+
+crs-filesystem-folder .pointer {
+    cursor: pointer;
+}
+
+crs-filesystem-folder #filemenu {
+    position: absolute;
+    top: 2rem;
+    right: 1rem;
+    width: max-content;
+    height: max-content;
+    background: white;
+    filter: drop-shadow(0px 0px 5px #00000050);
+    padding: 0.5rem 0;
+}
+
+crs-filesystem-folder #filemenubackground {
+    content: "";
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background: transparent;
+}
+
+crs-filesystem-folder #filemenu li {
+    padding: 0 0.5rem;
+    cursor: pointer;
 }

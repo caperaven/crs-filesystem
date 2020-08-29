@@ -24,6 +24,7 @@ export default class CRSFilesystemFolder extends crsbinding.classes.BindableElem
     constructor() {
         super();
         this.images = ["png", "jpg", "jpeg", "svg"];
+        this.stack = [];
     }
 
     dispose() {
@@ -34,6 +35,7 @@ export default class CRSFilesystemFolder extends crsbinding.classes.BindableElem
     preLoad() {
         this.setProperty("chevronIcon", this.chevronIcon);
         this.setProperty("stackLength", 0);
+        this.setProperty("menuVisible", false);
     }
 
     async openFolder() {
@@ -90,9 +92,31 @@ export default class CRSFilesystemFolder extends crsbinding.classes.BindableElem
 
         const item = crsbinding.data.getValue(id);
         if (item.handle.isDirectory == true) {
+            this.backupThisFolder();
+
             const content = await this._getContent(item.handle);
+            this.setProperty("folder", item.name);
             this.setProperty("items", content);
         }
+    }
+
+    backupThisFolder() {
+        const name = this.getProperty("folder");
+        const items = this.getProperty("items").slice(0);
+        this.stack.push({
+            name: name,
+            items: items
+        });
+        this.setProperty("stackLength", this.stack.length);
+    }
+
+    navigateBack(event) {
+        if (event.target.nodeName == "svg" || this.stack.length == 0) return;
+
+        const folder = this.stack.pop();
+        this.setProperty("folder", folder.name);
+        this.setProperty("items", folder.items);
+        this.setProperty("stackLength", this.stack.length);
     }
 }
 

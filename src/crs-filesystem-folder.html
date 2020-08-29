@@ -1,13 +1,35 @@
+<svg viewBox="0 0 24 25" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" hidden style="display:none">
+    <symbol id="chevron">
+        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+    </symbol>
+    <symbol id="more">
+        <path d="M0 0h24v24H0z" fill="none"/><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+    </symbol>
+</svg>
+
 <h2>Folder</h2>
 
 <button click.call="openFolder" hidden.if="folderOpen == true">Open Project Folder</button>
 
-<div hidden.if="folderOpen != true" class="folder-nav">
-    <svg width="24" height="24" class="chevron" style="transform: rotate(180deg)" hidden.if="stackLength == 0">
-        <use href="${chevronIcon}"></use>
+<div hidden.if="folderOpen != true" class="folder-nav" dblclick.call="navigateBack($event)" style="position: relative">
+    <svg width="24" height="24" class="chevron" style="transform: rotate(180deg)" hidden.if="stackLength == 0" click.call="navigateBack($event)">
+        <use href="#chevron"></use>
     </svg>
 
-    <span>${folder}</span>
+    <span class="stretch">${folder}</span>
+
+    <svg width="24" height="24" class="pointer" click.setValue="$context.menuVisible = !$context.menuVisible">
+        <use href="#more"></use>
+    </svg>
+
+    <div id="filemenubackground" hidden.if="menuVisible != true" click.setValue="$context.menuVisible = !$context.menuVisible"></div>
+
+    <ul id="filemenu" role="menu" hidden.if="menuVisible != true" style="position: absolute" click.setValue="$context.menuVisible = !$context.menuVisible">
+        <li>Open Folder</li>
+        <hr/>
+        <li>New Folder</li>
+        <li>New File</li>
+    </ul>
 </div>
 
 <ul role="list" dblclick.call="dblClick($event)">
