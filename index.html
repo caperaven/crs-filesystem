@@ -8,6 +8,7 @@
     <title>Document</title>
     <script type="module" src="node_modules/crs-binding/crs-binding.js"></script>
     <script src="src/crs-filesystem-folder.js" type="module"></script>
+    <link rel="stylesheet" href="src/crs-filesystem-folder.css">
 
     <style>
         html, body {
@@ -26,7 +27,22 @@
     </style>
 </head>
 <body>
-    <crs-filesystem-folder></crs-filesystem-folder>
+    <svg viewBox="0 0 24 25" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" hidden style="display:none">
+        <symbol id="folder">
+            <path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
+        </symbol>
+        <symbol id="file">
+            <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/>
+        </symbol>
+        <symbol id="image">
+            <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+        </symbol>
+        <symbol id="chevron">
+            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+        </symbol>
+    </svg>
+
+    <crs-filesystem-folder folder-icon="folder" file-icon="file" graphic-icon="image" chevron-icon="chevron"></crs-filesystem-folder>
 
     <script type="module">
         import Index from "./index.js";

@@ -1,6 +1,23 @@
 // https://web.dev/native-file-system/#whats-new
 
 export default class CRSFilesystemFolder extends crsbinding.classes.BindableElement {
+    get folderIcon() {
+        return `#${this.getAttribute("folder-icon") || "folder"}`;
+    }
+
+    get fileIcon() {
+        return `#${this.getAttribute("file-icon") || "file"}`;
+    }
+
+    get graphicIcon() {
+        return `#${this.getAttribute("graphic-icon") || "image"}`;
+    }
+
+    get chevronIcon() {
+        return `#${this.getAttribute("chevron-icon") || "chevron"}`;
+    }
+
+
     get html() {
         return import.meta.url.replace(".js", ".html");
     }
@@ -44,14 +61,14 @@ export default class CRSFilesystemFolder extends crsbinding.classes.BindableElem
         const result = {
             handle: entry,
             name: entry.name,
-            type: "#folder"
+            type: this.folderIcon
         };
 
         if (entry.isFile == true) {
             const parts = entry.name.split(".");
             result.name = parts[0];
             result.ext = parts[1].toLowerCase();
-            result.type = this.images.indexOf(result.ext) == -1 ? "#file" : "#image";
+            result.type = this.images.indexOf(result.ext) == -1 ? this.fileIcon : this.graphicIcon;
         }
 
         return result;

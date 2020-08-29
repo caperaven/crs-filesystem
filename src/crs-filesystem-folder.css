@@ -1,0 +1,60 @@
+crs-filesystem-folder {
+    --cl-file: cornflowerblue;
+    --cl-folder: #ff0080;
+    --cl-image: #00bcd4;
+    user-select: none;
+}
+
+crs-filesystem-folder ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: 100%;
+    height: 100%;
+}
+
+crs-filesystem-folder li {
+    display: flex;
+    align-items: center;
+    height: 2rem;
+}
+
+crs-filesystem-folder li:hover {
+    background: #f4f4f4;
+}
+
+crs-filesystem-folder li svg {
+    margin: 0 1rem;
+}
+
+crs-filesystem-folder li div {
+    flex: 1;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin-right: 1rem;
+}
+
+crs-filesystem-folder [hidden] {
+    display: none;
+}
+
+crs-filesystem-folder .chevron {
+    margin-left: 0;
+}
+
+[data-type="#file"] {
+    fill: var(--cl-file);
+}
+
+[data-type="#folder"] {
+    fill: var(--cl-folder);
+}
+
+[data-type="#image"] {
+    fill: var(--cl-image);
+}
+
+[data-type="#file"] .chevron, [data-type="#image"] .chevron {
+    display: none;
+}
