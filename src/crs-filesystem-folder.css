@@ -19,6 +19,10 @@ crs-filesystem-folder li {
     height: 2rem;
 }
 
+crs-filesystem-folder li * {
+    pointer-events: none;
+}
+
 crs-filesystem-folder li:hover {
     background: #f4f4f4;
 }
@@ -35,26 +39,34 @@ crs-filesystem-folder li div {
     margin-right: 1rem;
 }
 
-crs-filesystem-folder [hidden] {
-    display: none;
-}
-
 crs-filesystem-folder .chevron {
     margin-left: 0;
 }
 
-[data-type="#file"] {
+crs-filesystem-folder .folder-nav {
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+    line-height: 2rem;
+    color: var(--cl-folder);
+}
+
+crs-filesystem-folder [data-type="#file"] {
     fill: var(--cl-file);
 }
 
-[data-type="#folder"] {
+crs-filesystem-folder [data-type="#folder"] {
     fill: var(--cl-folder);
 }
 
-[data-type="#image"] {
+crs-filesystem-folder [data-type="#image"] {
     fill: var(--cl-image);
 }
 
-[data-type="#file"] .chevron, [data-type="#image"] .chevron {
+crs-filesystem-folder [data-type="#file"] .chevron, crs-filesystem-folder [data-type="#image"] .chevron {
+    display: none;
+}
+
+crs-filesystem-folder [hidden] {
     display: none;
 }

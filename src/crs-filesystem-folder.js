@@ -17,7 +17,6 @@ export default class CRSFilesystemFolder extends crsbinding.classes.BindableElem
         return `#${this.getAttribute("chevron-icon") || "chevron"}`;
     }
 
-
     get html() {
         return import.meta.url.replace(".js", ".html");
     }
@@ -34,25 +33,25 @@ export default class CRSFilesystemFolder extends crsbinding.classes.BindableElem
 
     preLoad() {
         this.setProperty("chevronIcon", this.chevronIcon);
+        this.setProperty("stackLength", 0);
     }
 
     async openFolder() {
         this.folder = await window.chooseFileSystemEntries({type: "open-directory"});
-        await this.refresh();
+        const content = await this._getContent(this.folder);
 
+        this.setProperty("folder", this.folder.name);
+        this.setProperty("items", content);
         this.setProperty("folderOpen", true);
     }
 
-    async refresh() {
-        const entries = await this.folder.getEntries();
+    async _getContent(folder) {
+        const entries = await folder.getEntries();
         const content = [];
-
         for await (const entry of entries) {
             content.push(this._createFileContent(entry));
         }
-
-        this.homeContent = await this._sortContent(content);
-        this.setProperty("items", this.homeContent);
+        return await this._sortContent(content);
     }
 
     onMessage(msg) {
@@ -83,6 +82,17 @@ export default class CRSFilesystemFolder extends crsbinding.classes.BindableElem
         const files = collection.filter(item => item.handle.isFile == true).sort((a, b) => a.name < b.name ? -1 : 1);
 
         return [...folders, ...files];
+    }
+
+    async dblClick(event) {
+        const id = event.target.dataset.uid;
+        if (id == null) return;
+
+        const item = crsbinding.data.getValue(id);
+        if (item.handle.isDirectory == true) {
+            const content = await this._getContent(item.handle);
+            this.setProperty("items", content);
+        }
     }
 }
 

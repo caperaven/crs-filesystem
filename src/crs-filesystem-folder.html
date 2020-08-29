@@ -1,10 +1,16 @@
 <h2>Folder</h2>
 
-<div role="toolbar">
-    <button click.call="openFolder" hidden.if="folderOpen == true">Open Project Folder</button>
+<button click.call="openFolder" hidden.if="folderOpen == true">Open Project Folder</button>
+
+<div hidden.if="folderOpen != true" class="folder-nav">
+    <svg width="24" height="24" class="chevron" style="transform: rotate(180deg)" hidden.if="stackLength == 0">
+        <use href="${chevronIcon}"></use>
+    </svg>
+
+    <span>${folder}</span>
 </div>
 
-<ul role="list">
+<ul role="list" dblclick.call="dblClick($event)">
     <template for="item of items">
         <li data-type="${item.type}">
             <svg width="24" height="24">
