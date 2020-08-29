@@ -32,6 +32,10 @@ export default class CRSFilesystemFolder extends crsbinding.classes.BindableElem
         super.dispose();
     }
 
+    preLoad() {
+        this.setProperty("chevronIcon", this.chevronIcon);
+    }
+
     async openFolder() {
         this.folder = await window.chooseFileSystemEntries({type: "open-directory"});
         await this.refresh();

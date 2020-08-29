@@ -8,13 +8,13 @@
     <template for="item of items">
         <li data-type="${item.type}">
             <svg width="24" height="24">
-                <use xlink:href="${item.type}"></use>
+                <use href="${item.type}"></use>
             </svg>
 
             <div>${item.handle.name}</div>
 
             <svg width="24" height="24" class="chevron">
-                <use href="${chevron}"></use>
+                <use href="${$parent.chevronIcon}"></use>
             </svg>
         </li>
     </template>
